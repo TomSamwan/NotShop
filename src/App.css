@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+:root {
+  --font-sm: 0.64rem;
+  --font-tiny: 0.8rem;
+  --font-base: 1rem;
+  --font-lg: 1.25rem;
+  --font-xl: 1.56rem;
+  --font-2xl: 1.95rem;
+  --font-3xl: 2.44rem;
+  --font-4xl: 3.05rem;
+  --font-5xl: 3.81rem;
+  --font-6xl: 4.77rem;
+  --font-7xl: 5.96rem;
+}
+
+.text-sm   { font-size: var(--font-sm); }
+.text-tiny { font-size: var(--font-tiny); }
+.text-base { font-size: var(--font-base); }
+.text-lg   { font-size: var(--font-lg); }
+.text-xl   { font-size: var(--font-xl); }
+.text-2xl  { font-size: var(--font-2xl); }
+.text-3xl  { font-size: var(--font-3xl); }
+.text-4xl  { font-size: var(--font-4xl); }
+.text-5xl  { font-size: var(--font-5xl); }
+.text-6xl  { font-size: var(--font-6xl); }
+.text-7xl  { font-size: var(--font-7xl); }
