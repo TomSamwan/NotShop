@@ -1,0 +1,14 @@
+***
+- make sure that the mobile menu sidebar disappears when navigating to new link/page.
+- add authentication using 0auth??? (do some research)
+ + set up login/register logic so that is can be used as authentication
+
+- do some react testing! (DEFINITELY need to do some more research on that)
+
+
+**
+- set up with an actual database, mongoDB probably... localStorage is by no means a secure way of doing authentication and keeping data safe for rendering components
+
+*
+- style home page
+
