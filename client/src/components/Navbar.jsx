@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <nav className="relative bg-white after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 border-b-2 border-gray-200">
+      <div className="mx-auto px-2 sm:px-6 lg:px-8 border-b-2 border-gray-200">
         <div className="flex h-16 items-center justify-between">
           <div className="flex justify-between items-center sm:hidden">
             {/* <!-- Mobile menu button--> */}

@@ -42,8 +42,6 @@ export function CartProvider({ children }) {
   }
 
   function handleIncrement(increment, product) {
-    // const increment = e.target.attributes.increment.value;
-
     setCart((prevItems) =>
       prevItems.map((item) =>
         item.id == product.id
