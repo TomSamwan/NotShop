@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from "react";
+import { addItemToCart } from "../utils/api";
 
 const CartContext = createContext(null);
 
@@ -9,8 +10,20 @@ export function CartProvider({ children }) {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 
   function addToCart(item) {
+    let cartItem = {
+      title: item.title,
+      price: item.price,
+      description: item.description,
+      category: item.category,
+      image: item.image,
+      rating: item.rating,
+    };
+    addItemToCart(cartItem);
+
     setCart((prevItems) => {
-      const existingItem = prevItems.find((product) => product.id === item.id);
+      const existingItem = prevItems.find(
+        (product) => product._id === item._id
+      );
 
       if (existingItem) {
         return prevItems.map((product) => {
@@ -35,7 +48,10 @@ export function CartProvider({ children }) {
     setCart((prevItems) =>
       prevItems.map((item) =>
         item.id == currentProduct.id
-          ? { ...item, quantity: e.target.value > 0 ? parseInt(e.target.value) : 1 }
+          ? {
+              ...item,
+              quantity: e.target.value > 0 ? parseInt(e.target.value) : 1,
+            }
           : item
       )
     );

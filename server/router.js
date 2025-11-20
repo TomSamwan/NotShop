@@ -7,10 +7,24 @@ router.route("/products").get(async (req, res) => {
   let db = database.getDB()
   let data = await db.collection("Products").find({}).toArray()
   if (data.length > 0) {
-    console.dir(res.json(data))
+    res.json(data)
   } else {
     throw new Error("Data not found!")
   }
+})
+
+router.route("/cart").post(async (req, res) => {
+  let db = database.getDB()
+  let mongoObject = {
+    title: req.body.title,
+    price: req.body.price,
+    description: req.body.description,
+    category: req.body.category,
+    image: req.body.image,
+    rating: req.body.rating,
+  }
+  let data = await db.collection("Cart").insertOne(mongoObject)
+  return data
 })
 
 module.exports = router

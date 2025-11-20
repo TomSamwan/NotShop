@@ -1,5 +1,5 @@
 export async function productsLoader() {
-  const response = await fetch("https://not-shop-blush.vercel.app/products");
+  const response = await fetch("http://localhost:8080/products");
   if (!response.ok) {
     throw new Error("no data fetched!");
   }
