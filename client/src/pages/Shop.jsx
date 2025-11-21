@@ -11,9 +11,9 @@ export default function Shop() {
       <h1>Shop page</h1>
       <section className="products">
         products!
-        {data.length ? (
+        {data.length > 0 ? (
           data.map((product) => (
-            <div key={product.id} className="product-card">
+            <div key={product._id} className="product-card">
               <figure>
                 <img src={product.image} alt={`image of ${product.image}`} />
               </figure>

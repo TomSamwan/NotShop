@@ -1,0 +1,29 @@
+***
+- setup login/register logic and implement with mongoDB
+- add authentication using 0auth??? (do some research)
+OR
+- use JWTs and session tokens along with authenticating through the logged in user using the backend.
+
+- get rid of localStorage use and replace with mongoDB fetching and API routes
+ + when adding to cart, maybe use localstorage AND push to db as well.
+ + when pushing new cart item to db, needs to only update qty of item if duplicate (just like localstorage method does)
+
+- do some react testing! (DEFINITELY need to do some more research on that)
+
+- make sure that the mobile menu sidebar disappears when navigating to new link/page.
+
+- setup API routes
++ get cart
++ remove cartitem from cart
++ modify cartitem qty
+
++ get login/register
++ post credentials and add logic to log in/register/return error
+
+**
+- set up with an actual database, mongoDB probably... localStorage is by no means a secure way of doing authentication and keeping data safe for rendering components
+- add hydrateFallback
+
+*
+- style home page
+
