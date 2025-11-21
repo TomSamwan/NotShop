@@ -13,6 +13,12 @@ router.route("/products").get(async (req, res) => {
   }
 })
 
+router.route("/products/seedData").post(async (req, res) => {
+  let db = database.getDB()
+  let data = await db.collection("Products").insertMany(req.body)
+  return data
+})
+
 router.route("/cart").post(async (req, res) => {
   let db = database.getDB()
   let mongoObject = {
