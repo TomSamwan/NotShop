@@ -3,18 +3,30 @@ import { useCart } from "../context/CartContext";
 import "../styles/Cart.css";
 
 export default function Cart() {
-  const { cart, removeFromCart, modifyQty, handleIncrement, calcCartTotal } =
-    useCart();
+  const {
+    cart,
+    removeFromCart,
+    modifyQty,
+    handleIncrement,
+    calcCartTotal,
+    saveCartToDB,
+  } = useCart();
 
   return (
     <>
       <div className="flex h-full flex-col overflow-y-auto bg-white shadow-xl">
-        <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+        <div className="flex-1 align-center overflow-y-auto px-4 py-6 sm:px-6">
           {cart.length > 0 ? (
             <div className="flex items-start justify-between">
               <h2 className="text-lg font-medium text-gray-900">
                 Shopping cart
               </h2>
+              <button
+                onClick={() => saveCartToDB()}
+                className="font-medium px-2 py-1  rounded-md bg-indigo-600 text-white hover:bg-indigo-700"
+              >
+                Save Cart
+              </button>
             </div>
           ) : (
             <div className="flex flex-col">
@@ -90,7 +102,7 @@ export default function Cart() {
                         <div className="flex">
                           <button
                             type="button"
-                            onClick={() => removeFromCart(product.id)}
+                            onClick={() => removeFromCart(product._id)}
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
                             Remove

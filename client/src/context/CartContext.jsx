@@ -1,5 +1,5 @@
-import { createContext, useState, useContext } from "react";
-import { addItemToCart } from "../utils/api";
+import { createContext, useState, useContext, useEffect } from "react";
+import { saveCart } from "../utils/api";
 
 const CartContext = createContext(null);
 
@@ -9,45 +9,32 @@ export function CartProvider({ children }) {
   );
   localStorage.setItem("cartItems", JSON.stringify(cart));
 
-  function addToCart(item) {
-    let cartItem = {
-      title: item.title,
-      price: item.price,
-      description: item.description,
-      category: item.category,
-      image: item.image,
-      rating: item.rating,
-    };
-    addItemToCart(cartItem);
 
-    setCart((prevItems) => {
-      const existingItem = prevItems.find(
-        (product) => product._id === item._id
-      );
+  const addToCart = (item) => {
+    const existingItem = cart.find((product) => product._id === item._id);
 
-      if (existingItem) {
-        return prevItems.map((product) => {
-          return product.id === item.id
-            ? { ...product, quantity: product.quantity + 1 }
-            : product;
-        });
-      } else {
-        return [...prevItems, { ...item, quantity: 1 }];
-      }
-    });
-  }
+    setCart((prevCart) =>
+      existingItem
+        ? prevCart.map((product) => {
+            return product._id === item._id
+              ? { ...product, quantity: product.quantity + 1 }
+              : product;
+          })
+        : [...prevCart, { ...item, quantity: 1 }]
+    );
+  };
 
-  function removeFromCart(id) {
-    const updatedCart = cart.filter((product) => product.id !== id);
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter((product) => product._id !== id);
     setCart(updatedCart);
-  }
+  };
 
-  function modifyQty(e, id) {
-    const currentProduct = cart.find((cartItem) => id === cartItem.id);
+  const modifyQty = (e, id) => {
+    const currentProduct = cart.find((cartItem) => id === cartItem._id);
 
-    setCart((prevItems) =>
-      prevItems.map((item) =>
-        item.id == currentProduct.id
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item._id == currentProduct._id
           ? {
               ...item,
               quantity: e.target.value > 0 ? parseInt(e.target.value) : 1,
@@ -55,12 +42,12 @@ export function CartProvider({ children }) {
           : item
       )
     );
-  }
+  };
 
-  function handleIncrement(increment, product) {
-    setCart((prevItems) =>
-      prevItems.map((item) =>
-        item.id == product.id
+  const handleIncrement = (increment, product) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item._id == product._id
           ? {
               ...item,
               quantity:
@@ -73,7 +60,7 @@ export function CartProvider({ children }) {
           : item
       )
     );
-  }
+  };
 
   const calcCartQty = () =>
     cart.length > 0 &&
@@ -86,6 +73,13 @@ export function CartProvider({ children }) {
       .reduce((acc, curr) => acc + curr)
       .toFixed(2);
 
+  const saveCartToDB = () => {
+    saveCart(cart);
+  };
+
+  useEffect(()=> saveCartToDB(), [cart])
+
+
   const value = {
     cart,
     addToCart,
@@ -94,6 +88,7 @@ export function CartProvider({ children }) {
     handleIncrement,
     calcCartQty,
     calcCartTotal,
+    saveCartToDB,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
@@ -102,7 +97,7 @@ export function CartProvider({ children }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error("this is not good :(");
+    throw new Error("No cart content found");
   }
   return context;
 }
