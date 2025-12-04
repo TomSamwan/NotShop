@@ -1,11 +1,10 @@
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8080/api";
 
 export async function saveCart(cart) {
-  console.dir(cart)
   let options = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json", // Essential for sending JSON data
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(cart),
   };
@@ -17,37 +16,14 @@ export async function saveCart(cart) {
   });
 }
 
-// export async function updateCartItem(data) {
-//   let options = {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   };
-//   fetch(`${URL}/cart/updateCart`, options).then((response) => {
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//     return response.json();
-//   });
-// }
-
-
-// seeding product data to DB
-export async function addProductSeedData(data) {
+//handle login
+export async function handleLogin(e, data) {
+  e.preventDefault()
   console.dir(JSON.stringify(data));
-  let options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  };
-  fetch(`${URL}/Products/seedData`, options).then((response) => {
+  fetch(`${URL}/login`).then((response) => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return response.json();
+    return console.log("HELLO");
   });
 }

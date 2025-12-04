@@ -1,19 +1,11 @@
 import { useState } from "react";
+import { handleLogin } from "../utils/api";
+
 
 export default function Login() {
-  const [users, setUsers] = useState([
-    {
-      user: "Tom",
-      password: "123",
-    },
-    {
-      user: "Bernie",
-      password: "Floppy"
-    }
-  ]);
-
   const [inputs, setInputs] = useState({
     user: "Tom",
+    email: "email@gmail.com",
     password: "123",
   });
 
@@ -25,34 +17,21 @@ export default function Login() {
     }));
   }
 
-  function handleLogin(e) {
-    e.preventDefault();
-    let result = '';
-    for(let check of users) {
-      const obj = JSON.stringify(check)
-      const i = JSON.stringify(inputs)
-
-      if(obj == i) {
-        result = JSON.parse(obj).user
-        console.log(result)
-        return result
-      }
-    }
-    console.log(result && result)
-
-    // checks if the username and password matches
-    // any of the objects in the "users" array
-    // and then logs the user in
-  }
-
   return (
-    <form key="1" onSubmit={(e) => handleLogin(e)}>
+    <form key="1" onSubmit={(e) => handleLogin(e, inputs)}>
       <input
         onChange={(e) => handleChange(e)}
-        name="user"
+        name="name"
         type="text"
         placeholder="username"
         value={inputs.user}
+      />
+      <input
+        onChange={(e) => handleChange(e)}
+        name="email"
+        type="email"
+        placeholder="email"
+        value={inputs.email}
       />
       <input
         onChange={(e) => handleChange(e)}

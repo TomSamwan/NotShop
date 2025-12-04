@@ -33,7 +33,10 @@ export default function Cart() {
               <h2 className="text-lg font-medium text-gray-900">Cart Empty!</h2>
               <div className="mt-6 overflow-hidden">
                 <Link to="/Shop">
-                  <div className="inline-block text-indigo-600 font-[600] italic group">
+                  <div
+                    onClick={() => saveCartToDB()}
+                    className="inline-block text-indigo-600 font-[600] italic group"
+                  >
                     Browse the catalogue
                     <div className="group mt-[-3px] h-[2.5px] w-0 group-hover:w-full bg-indigo-600 duration-50 transition-all ease-out"></div>
                   </div>
@@ -136,7 +139,10 @@ export default function Cart() {
             </div>
             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
               <Link to="/Shop">
-                <p className="font-medium text-indigo-600 hover:text-indigo-500">
+                <p
+                  onClick={() => saveCartToDB()}
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
                   Continue Shopping
                   <span aria-hidden="true"> &rarr;</span>
                 </p>
